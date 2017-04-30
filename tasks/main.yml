@@ -2,15 +2,20 @@
 - name: Create pxe user
   user: name={{ pxe_user }} comment="pxe" shell=/bin/bash
 
-- name: Clone pxe repo
-  git: repo=https://github.com/pxe/tftpboot.git dest={{ pxe_path }} version=1.2
+- name: Install the latest version of unzip
+  package:
+    name: unzip
+    state: latest
+
+- name: Check if downloaded
+  stat:
+    path: "{{ pxe_path }}/fogproject-{{ pxe_version }}"
+  register: stat_result
+
+- name: Download and extract fog archive
+  unarchive:
+    src: "https://github.com/FOGProject/fogproject/archive/{{ pxe_version }}.zip"
+    dest: "{{ pxe_path }}"
+    remote_src: True
   become_user: "{{ pxe_user }}"
-
-- name: Install systemd unit
-  template: src=pxe.service.j2 dest=/etc/systemd/system/pxe.service
-
-- name: Enable pxe service
-  # Manually, see ansible-modules-core #3784
-  systemd: enabled=True name=pxe
-  notify:
-  - Restart pxe
+  when: stat_result.stat.exists == False

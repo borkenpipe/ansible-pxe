@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "fedora/25-bloud-base"
+  config.vm.box = "centos/7"
   config.vm.hostname = "pxe"
   config.nfs.functional = false
   config.vm.define :pxe do |pxe|

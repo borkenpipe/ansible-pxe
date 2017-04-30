@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: "Jon Robison"
+  description: "Ansible role that installs and configures erpxe"
+  license: GPL3
+  min_ansible_version: 1.9
+  platforms:
+    - name: Fedora
+      versions:
+        - all
+  categories:
+    - pxe
+    - network boot
+dependencies: []

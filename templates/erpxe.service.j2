@@ -1,9 +1,0 @@
-[Unit]
-Description=erpxe voice control
-
-[Service]
-ExecStart=/usr/bin/python {{ erpxe_base_path }}/erpxe/erpxe.py
-User=erpxe
-
-[Install]
-WantedBy=multi-user.target

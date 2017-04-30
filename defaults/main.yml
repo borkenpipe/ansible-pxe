@@ -1,3 +1,3 @@
 ---
-erpxe_user: erpxe
-erpxe_path: /home/{{ erpxe_user }}
+pxe_user: pxe
+pxe_path: /home/{{ pxe_user }}

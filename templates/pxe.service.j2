@@ -1,0 +1,9 @@
+[Unit]
+Description=pxe voice control
+
+[Service]
+ExecStart=/usr/bin/python {{ pxe_base_path }}/pxe/pxe.py
+User=pxe
+
+[Install]
+WantedBy=multi-user.target

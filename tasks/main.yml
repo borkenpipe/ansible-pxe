@@ -1,16 +1,16 @@
 ---
-- name: Create erpxe user
-  user: name={{ erpxe_user }} comment="erpxe" shell=/bin/bash
+- name: Create pxe user
+  user: name={{ pxe_user }} comment="pxe" shell=/bin/bash
 
-- name: Clone erpxe repo
-  git: repo=https://github.com/ERPXE/tftpboot.git dest={{ erpxe_path }} version=1.2
-  become_user: "{{ erpxe_user }}"
+- name: Clone pxe repo
+  git: repo=https://github.com/pxe/tftpboot.git dest={{ pxe_path }} version=1.2
+  become_user: "{{ pxe_user }}"
 
 - name: Install systemd unit
-  template: src=erpxe.service.j2 dest=/etc/systemd/system/erpxe.service
+  template: src=pxe.service.j2 dest=/etc/systemd/system/pxe.service
 
-- name: Enable erpxe service
+- name: Enable pxe service
   # Manually, see ansible-modules-core #3784
-  systemd: enabled=True name=erpxe
+  systemd: enabled=True name=pxe
   notify:
-  - Restart erpxe
+  - Restart pxe

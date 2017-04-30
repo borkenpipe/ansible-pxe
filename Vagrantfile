@@ -3,9 +3,9 @@
 
 Vagrant.configure("2") do |config|
   config.vm.box = "fedora/25-bloud-base"
-  config.vm.hostname = "erpxe"
+  config.vm.hostname = "pxe"
   config.nfs.functional = false
-  config.vm.define :erpxe do |erpxe|
+  config.vm.define :pxe do |pxe|
   end
 
   # Ansible provisioner.

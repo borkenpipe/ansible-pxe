@@ -1,6 +1,6 @@
 ---
-# Ansible playbook for a erpxe
-- hosts: erpxe
+# Ansible playbook for a pxe
+- hosts: pxe
   become: True
   become_method: 'sudo'
   vars_files:

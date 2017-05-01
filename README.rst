@@ -56,7 +56,7 @@ Playbook::
 TODO
 ----
 
-* WIP - logic and trivial passing unit test(s)
+* WIP - logic for install script
 
 License
 -------

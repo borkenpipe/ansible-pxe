@@ -7,15 +7,9 @@
     - tftp-server
     - syslinux
 
-- name: Enable tftp
-  lineinfile:
-    path: /etc/xinetd.d/tftp
-    regexp: 'disable\s+= (yes|no)'
-    line: "{{'\t'}}disable = no"
-
-- name: Systemd enable xinetd
+- name: Systemd enable tftp
   systemd:
-    name: xinetd
+    name: tftp
     enabled: yes
     state: started
 

@@ -13,6 +13,12 @@
     regexp: 'disable\s+= (yes|no)'
     line: "{{'\t'}}disable = no"
 
+- name: Systemd enable xinetd
+  systemd:
+    name: xinetd
+    enabled: yes
+    state: started
+
 - name: TFTP firewall rule
   firewalld:
     port: 69/udp

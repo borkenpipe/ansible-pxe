@@ -56,7 +56,7 @@ Playbook::
 TODO
 ----
 
-* WIP - logic for install script
+* Break out distros into iterable options, not a single vmlinuz
 
 License
 -------

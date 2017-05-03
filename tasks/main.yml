@@ -4,20 +4,7 @@
     name: "{{ item }}"
     state: latest
   with_items:
-    - tftp-server
     - syslinux
-
-- name: Systemd enable tftp
-  systemd:
-    name: tftp
-    enabled: yes
-    state: started
-
-- name: TFTP firewall rule
-  firewalld:
-    port: 69/udp
-    permanent: true
-    state: enabled
 
 - name: Check if syslinux files copied
   stat:
@@ -42,7 +29,7 @@
 - name: Copy config
   template:
     src: default.j2
-    dest: "{{ pxe_root_path }}/pxelinux.cfg/default"
+    dest: "{{ pxe_root_path }}/pxelinux.cfg/{{ pxe_config_name }}"
 
 - include: populate.yml
   vars:

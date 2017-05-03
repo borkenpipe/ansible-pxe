@@ -7,7 +7,7 @@ ansible-pxe
 .. image:: https://travis-ci.org/narfman0/ansible-pxe.png?branch=master
     :target: https://travis-ci.org/narfman0/ansible-pxe
 
-Ansible module for pxe project.
+Ansible module for pxe
 
 Usage
 -----
@@ -18,12 +18,7 @@ A vagrant file has been included for easier testing. To use::
     vagrant up --provider virtualbox
 
 This will provision the machine such that a working pxe
-is ready to run. Some tweaks to sound devices may be needed.
-
-Raspberry pis need a few special tweaks, and some special
-logic is reservered for them. To identify your device(s) as
-raspberry pis, please but them in the `rasppi` group in e.g.
-`/etc/ansible/hosts`.
+is ready to run.
 
 Running playbook directly
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -50,11 +45,6 @@ Playbook::
         - vars/main.yml
       roles:
       - { role: narfman0.pxe }
-
-TODO
-----
-
-* Detect if a 'memdisk' method url is http, and download ISO if necessary..?
 
 License
 -------

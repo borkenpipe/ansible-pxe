@@ -11,4 +11,5 @@ galaxy_info:
   categories:
     - pxe
     - network boot
-dependencies: []
+dependencies:
+  - narfman0.tftp

@@ -30,18 +30,23 @@
 
 - name: Check if cfg directory exists
   stat:
-    path: "/var/lib/tftpboot/pxelinux.cfg"
+    path: "{{ pxe_root_path }}/pxelinux.cfg"
   register: stat_result_cfg
 
 - name: Create cfg directory
   file:
-    path: "/var/lib/tftpboot/pxelinux.cfg"
+    path: "{{ pxe_root_path }}/pxelinux.cfg"
     state: directory
     mode: 0755
 
 - name: Copy config
   template:
     src: default.j2
-    dest: /var/lib/tftpboot/pxelinux.cfg/default
+    dest: "{{ pxe_root_path }}/pxelinux.cfg/default"
 
 - include: populate.yml
+  vars:
+    url: "{{ item.url }}"
+    path: "{{ pxe_images_path }}/{{ item.name }}/{{ item.arch }}"
+  with_items:
+    - "{{ pxe_images }}"

@@ -5,7 +5,9 @@ ONTIMEOUT local
 menu title ########## PXE Boot Menu ##########
 label 1
 menu label ^1) Boot from local drive
-label 2
-menu label ^2) Install CentOS 7 x64 with http://mirror.centos.org Repo
-kernel centos7/vmlinuz
-append initrd=centos7/initrd.img method=http://mirror.centos.org/centos/7/os/x86_64/ devfs=nomount ip=dhcp
+{% for item in pxe_images %}
+label {{ loop.index + 1 }}
+menu label ^{{ loop.index + 1 }}) {{ item.name }} {{ item.arch }}
+kernel {{ pxe_images_relative }}/{{ item.name }}/{{ item.arch }}/vmlinuz
+append initrd={{ pxe_images_relative }}/{{ item.name }}/{{ item.arch }}/initrd.img method={{ item.method }} devfs=nomount ip=dhcp
+{% endfor %}

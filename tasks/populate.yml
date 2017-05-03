@@ -10,9 +10,18 @@
     url: "{{ item.url }}/{{ item.initrd }}"
     dest: "{{ path }}/{{ item.initrd }}"
     mode: 0664
+  when: item.method != 'memdisk'
 
 - name: Download vmlinuz
   get_url:
     url: "{{ item.url }}/{{ item.kernel }}"
     dest: "{{ path }}/{{ item.kernel }}"
     mode: 0664
+  when: item.method != 'memdisk'
+
+- name: Download iso
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ path }}/{{ item.name }}.iso"
+    mode: 0664
+  when: item.method == 'memdisk' and 'http' in item.url

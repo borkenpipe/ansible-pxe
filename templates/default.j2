@@ -11,7 +11,7 @@ menu label ^{{ loop.index + 1 }}) {{ item.name }} {{ item.arch }}
 {% if item.method == 'memdisk' %}
 root (hd0,0)
 kernel memdisk
-append iso initrd={{ item.url }} raw
+append iso initrd={{ pxe_images_relative }}/{{ item.name }}/{{ item.arch }}/{{ item.name }}.iso raw
 {% else %}
 kernel {{ pxe_images_relative }}/{{ item.name }}/{{ item.arch }}/{{ item.kernel }}
 append initrd={{ pxe_images_relative }}/{{ item.name }}/{{ item.arch }}/{{ item.initrd }} method={{ item.method }} devfs=nomount ip=dhcp

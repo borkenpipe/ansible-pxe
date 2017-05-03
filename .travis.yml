@@ -2,8 +2,8 @@
 sudo: required
 
 env:
-  - distro: geerlingguy
-    release: docker-fedora24-ansible
+  - distro: narfman0
+    release: docker-fedora25-ansible
     init: /lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
 

@@ -44,32 +44,4 @@
     src: default.j2
     dest: /var/lib/tftpboot/pxelinux.cfg/default
 
-- name: Create directory
-  file:
-    path: "/var/lib/tftpboot/{{ pxe_distro_name }}"
-    state: directory
-    mode: 0755
-
-- name: Check for initrd
-  stat:
-    path: "/var/lib/tftpboot/{{ pxe_distro_name }}/initrd.img"
-  register: stat_result_initrd
-
-- name: download initrd
-  get_url:
-    url: "{{ pxe_root }}/initrd.img"
-    dest: "/var/lib/tftpboot/{{ pxe_distro_name }}/initrd.img"
-    mode: 0440
-  when: stat_result_initrd.stat.exists == False
-
-- name: Check for vmlinuz
-  stat:
-    path: "/var/lib/tftpboot/{{ pxe_distro_name }}/vmlinuz"
-  register: stat_result_vmlinuz
-
-- name: download vmlinuz
-  get_url:
-    url: "{{ pxe_root }}/vmlinuz"
-    dest: "/var/lib/tftpboot/{{ pxe_distro_name }}/vmlinuz"
-    mode: 0440
-  when: stat_result_vmlinuz.stat.exists == False
+- include: populate.yml

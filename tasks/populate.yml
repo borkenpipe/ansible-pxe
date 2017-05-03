@@ -5,26 +5,14 @@
     state: directory
     mode: 0755
 
-- name: Check for initrd
-  stat:
-    path: "{{ path }}/initrd.img"
-  register: stat_result_initrd
-
-- name: download initrd
+- name: Download initrd
   get_url:
-    url: "{{ url }}/initrd.img"
-    dest: "{{ path }}/initrd.img"
+    url: "{{ item.url }}/{{ item.initrd }}"
+    dest: "{{ path }}/{{ item.initrd }}"
     mode: 0664
-  when: stat_result_initrd.stat.exists == False
 
-- name: Check for vmlinuz
-  stat:
-    path: "{{ path }}/vmlinuz"
-  register: stat_result_vmlinuz
-
-- name: download vmlinuz
+- name: Download vmlinuz
   get_url:
-    url: "{{ url }}/vmlinuz"
-    dest: "{{ path }}/vmlinuz"
+    url: "{{ item.url }}/{{ item.kernel }}"
+    dest: "{{ path }}/{{ item.kernel }}"
     mode: 0664
-  when: stat_result_vmlinuz.stat.exists == False

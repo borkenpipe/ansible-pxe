@@ -21,11 +21,11 @@
 
 - name: Check if syslinux files copied
   stat:
-    path: "/var/lib/tftpboot/pxelinux.0"
+    path: "{{ pxe_root_path }}/pxelinux.0"
   register: stat_result
 
 - name: Copy syslinux files to root
-  shell: cp -r /usr/share/syslinux/* /var/lib/tftpboot/
+  shell: cp -r /usr/share/syslinux/* "{{ pxe_root_path }}"
   when: stat_result.stat.exists == False
 
 - name: Check if cfg directory exists
@@ -46,7 +46,6 @@
 
 - include: populate.yml
   vars:
-    url: "{{ item.url }}"
     path: "{{ pxe_images_path }}/{{ item.name }}/{{ item.arch }}"
   with_items:
     - "{{ pxe_images }}"

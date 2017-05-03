@@ -8,6 +8,13 @@ menu label ^1) Boot from local drive
 {% for item in pxe_images %}
 label {{ loop.index + 1 }}
 menu label ^{{ loop.index + 1 }}) {{ item.name }} {{ item.arch }}
-kernel {{ pxe_images_relative }}/{{ item.name }}/{{ item.arch }}/vmlinuz
-append initrd={{ pxe_images_relative }}/{{ item.name }}/{{ item.arch }}/initrd.img method={{ item.method }} devfs=nomount ip=dhcp
+{% if item.method == 'memdisk' %}
+root (hd0,0)
+kernel memdisk
+append iso initrd={{ item.url }} raw
+{% else %}
+kernel {{ pxe_images_relative }}/{{ item.name }}/{{ item.arch }}/{{ item.kernel }}
+append initrd={{ pxe_images_relative }}/{{ item.name }}/{{ item.arch }}/{{ item.initrd }} method={{ item.method }} devfs=nomount ip=dhcp
+{% endif %}
 {% endfor %}
+{{ pxe_menu_extra }}

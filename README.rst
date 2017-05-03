@@ -1,8 +1,6 @@
 ansible-pxe
 =============
 
-This is a WIP :)
-
 .. image:: http://img.shields.io/badge/ansible--galaxy-pxe-blue.svg
   :target: https://galaxy.ansible.com/narfman0/pxe/
 
@@ -56,7 +54,7 @@ Playbook::
 TODO
 ----
 
-* Break out distros into iterable options, not a single vmlinuz
+* Detect if a 'memdisk' method url is http, and download ISO if necessary..?
 
 License
 -------

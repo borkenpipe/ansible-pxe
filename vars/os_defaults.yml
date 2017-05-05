@@ -1,5 +1,4 @@
 ---
-pxe_images_path: "{{ pxe_root_path }}/{{ pxe_images_relative }}"
 pxe_root_path: /var/lib/tftpboot
 pxe_syslinux_archive_url: ''
 pxe_syslinux_root: /usr/share/syslinux

@@ -1,5 +1,4 @@
 ---
-pxe_images_path: "{{ pxe_root_path }}/{{ pxe_images_relative }}"
 pxe_root_path: /srv/tftp
 pxe_syslinux_archive_url: http://debian.gtisc.gatech.edu/debian/dists/stable/main/installer-amd64/current/images/netboot/netboot.tar.gz
 pxe_syslinux_root: ''

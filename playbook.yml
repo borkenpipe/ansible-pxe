@@ -4,7 +4,7 @@
   become: True
   become_method: 'sudo'
   vars_files:
-    - [ "vars/{{ ansible_os_family }}.yml", "vars/os_defaults.yml" ]
     - defaults/main.yml
+    - [ "vars/{{ ansible_os_family }}.yml", "vars/os_defaults.yml" ]
   tasks:
     - include: tasks/main.yml

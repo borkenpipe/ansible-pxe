@@ -1,5 +1,6 @@
 ---
 pxe_config_name: default
+pxe_images_path: "{{ pxe_root_path }}/{{ pxe_images_relative }}"
 pxe_images_relative: images
 pxe_images:
   #- { name: 'centos7', arch: 'x86_64', url: 'http://mirror.centos.org/centos/7/os/x86_64/isolinux', method: 'http://mirror.centos.org/centos/7/os/x86_64/', kernel: 'vmlinuz', initrd: 'initrd.img' }

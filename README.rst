@@ -20,6 +20,10 @@ A vagrant file has been included for easier testing. To use::
 This will provision the machine such that a working pxe
 is ready to run.
 
+This is not a strict dependency, but something like narfman0.tftp
+would be wise to configure as a complementary target. `pxe_root_path`
+would then be updated to the target directory for your tftp root path.
+
 Running playbook directly
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -44,6 +48,7 @@ Playbook::
       vars_files:
         - vars/main.yml
       roles:
+      - { role: narfman0.tftp }
       - { role: narfman0.pxe }
 
 License

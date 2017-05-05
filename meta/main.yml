@@ -5,11 +5,19 @@ galaxy_info:
   license: GPL3
   min_ansible_version: 1.9
   platforms:
+    - name: CentOS
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
     - name: Fedora
+      versions:
+        - all
+    - name: Ubuntu
       versions:
         - all
   categories:
     - pxe
     - network boot
-dependencies:
-  - narfman0.tftp
+dependencies: []

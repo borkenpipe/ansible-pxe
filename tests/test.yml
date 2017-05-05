@@ -1,5 +1,4 @@
 ---
 - hosts: all
   roles:
-    - narfman0.tftp
     - role_under_test

@@ -10,3 +10,6 @@ pxe_images:
 pxe_menu_extra: ''
 pxe_root_path: /var/lib/tftpboot
 pxe_version: 1.3.5
+pxe_syslinux_root: /usr/share/syslinux
+# the following is needed for debian/ubuntu only
+pxe_syslinux_archive_url: http://debian.gtisc.gatech.edu/debian/dists/stable/main/installer-amd64/current/images/netboot/netboot.tar.gz

@@ -1,15 +1,10 @@
 ---
 pxe_config_name: default
 pxe_images_relative: images
-pxe_images_path: "{{ pxe_root_path }}/{{ pxe_images_relative }}"
 pxe_images:
   #- { name: 'centos7', arch: 'x86_64', url: 'http://mirror.centos.org/centos/7/os/x86_64/isolinux', method: 'http://mirror.centos.org/centos/7/os/x86_64/', kernel: 'vmlinuz', initrd: 'initrd.img' }
   - { name: 'debian8', arch: 'x86_64', url: 'http://ftp.us.debian.org/debian/dists/jessie/main/installer-amd64/current/images/netboot/debian-installer/amd64', method: 'http://ftp.nl.debian.org/debian/dists/jessie/main/installer-amd64/current/images/', kernel: 'linux', initrd: 'initrd.gz' }
   #- { name: 'clonezilla', arch: 'x86_64', url: 'http://free.nchc.org.tw/clonezilla-live/stable/clonezilla-live-2.5.0-25-amd64.iso', method: 'memdisk' }
   #- { name: 'win7', arch: 'x86_64', url: 'images/win7/x86_64/win7.iso', method: 'memdisk' }
 pxe_menu_extra: ''
-pxe_root_path: "{{ "/srv/tftp" if ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' else "/var/lib/tftpboot" }}"
 pxe_version: 1.3.5
-pxe_syslinux_root: /usr/share/syslinux
-# the following is needed for debian/ubuntu only
-pxe_syslinux_archive_url: http://debian.gtisc.gatech.edu/debian/dists/stable/main/installer-amd64/current/images/netboot/netboot.tar.gz

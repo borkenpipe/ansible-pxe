@@ -1,9 +1,10 @@
 ---
-# Ansible playbook for a pxe
+# Ansible playbook for pxe
 - hosts: pxe
   become: True
   become_method: 'sudo'
   vars_files:
+    - [ "vars/{{ ansible_os_family }}.yml", "vars/os_defaults.yml" ]
     - defaults/main.yml
   tasks:
     - include: tasks/main.yml

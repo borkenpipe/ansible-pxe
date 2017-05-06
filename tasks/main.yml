@@ -8,11 +8,13 @@
   shell: echo "/srv/tftp"
   register: pxe_root_path
   when: ansible_distribution == 'Debian' and pxe_root_path == ''
+  changed_when: False
 
 - name: Set root path (non-debian)
   shell: echo "/var/lib/tftpboot"
   register: pxe_root_path
   when: ansible_distribution != 'Debian' and pxe_root_path == ''
+  changed_when: False
 
 - name: Create root directory
   file:

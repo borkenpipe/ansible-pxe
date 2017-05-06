@@ -4,6 +4,16 @@
     name: syslinux
     state: latest
 
+- name: Set root path (debian)
+  shell: echo "/srv/tftp"
+  register: pxe_root_path
+  when: ansible_distribution == 'Debian' and pxe_root_path == ''
+
+- name: Set root path (non-debian)
+  shell: echo "/var/lib/tftpboot"
+  register: pxe_root_path
+  when: ansible_distribution != 'Debian' and pxe_root_path == ''
+
 - name: Create root directory
   file:
     path: "{{ pxe_root_path }}"

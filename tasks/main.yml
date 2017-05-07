@@ -19,6 +19,9 @@
   register: pxe_root_path
   when: ansible_distribution == 'Debian' and pxe_path == ''
 
+- debug:
+    msg: "Root path: {{ pxe_root_path }}"
+
 - name: Create root directory
   file:
     path: "{{ pxe_root_path }}"

@@ -1,27 +1,48 @@
 ---
+- name: Check directory
+  stat:
+    path: "{{ path }}"
+  register: stat_result_dir
+
 - name: Create directory
   file:
     path: "{{ path }}"
     state: directory
     mode: 0755
+  when: stat_result_dir.stat.exists == False
+
+- name: Check initrd
+  stat:
+    path: "{{ path }}/{{ item.initrd }}"
+  register: stat_result_initrd
 
 - name: Download initrd
   get_url:
     url: "{{ item.url }}/{{ item.initrd }}"
     dest: "{{ path }}/{{ item.initrd }}"
     mode: 0664
-  when: item.method != 'memdisk'
+  when: stat_result_initrd.stat.exists == False and item.method != 'memdisk'
+
+- name: Check vmlinuz
+  stat:
+    path: "{{ path }}/{{ item.kernel }}"
+  register: stat_result_vmlinuz
 
 - name: Download vmlinuz
   get_url:
     url: "{{ item.url }}/{{ item.kernel }}"
     dest: "{{ path }}/{{ item.kernel }}"
     mode: 0664
-  when: item.method != 'memdisk'
+  when: stat_result_vmlinuz.stat.exists == False and item.method != 'memdisk'
+
+- name: Check iso
+  stat:
+    path: "{{ path }}/{{ item.name }}.iso"
+  register: stat_result_iso
 
 - name: Download iso
   get_url:
     url: "{{ item.url }}"
     dest: "{{ path }}/{{ item.name }}.iso"
     mode: 0664
-  when: item.method == 'memdisk' and 'http' in item.url
+  when: stat_result_iso.stat.exists == False and item.method == 'memdisk' and 'http' in item.url

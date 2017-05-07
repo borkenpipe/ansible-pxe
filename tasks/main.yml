@@ -75,6 +75,6 @@
 
 - include: populate.yml
   vars:
-    path: "{{ pxe_images_path }}/{{ item.name }}/{{ item.arch }}"
+    path: "{{ pxe_root.stdout }}/{{ pxe_images_relative }}/{{ item.name }}/{{ item.arch }}"
   with_items:
     - "{{ pxe_images }}"

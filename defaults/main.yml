@@ -8,7 +8,7 @@ pxe_images:
   #- { name: 'clonezilla', arch: 'x86_64', url: 'http://free.nchc.org.tw/clonezilla-live/stable/clonezilla-live-2.5.0-25-amd64.iso', method: 'memdisk' }
   #- { name: 'win7', arch: 'x86_64', url: 'images/win7/x86_64/win7.iso', method: 'memdisk' }
 pxe_menu_extra: '' # append to mxe boot config
-pxe_root_path: '' # set for debian and non-debian in tasks/main.yml
+pxe_root_path: 'default' # set for debian and non-debian in tasks/main.yml
 pxe_syslinux_archive_url: http://debian.gtisc.gatech.edu/debian/dists/stable/main/installer-amd64/current/images/netboot/netboot.tar.gz
 pxe_syslinux_root: /usr/share/syslinux
 pxe_version: 1.3.5

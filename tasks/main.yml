@@ -10,12 +10,12 @@
 - name: Set root path (non-debian)
   command: echo "/var/lib/tftpboot"
   register: pxe_root_path
-  when: ansible_distribution != 'Debian' and pxe_root_path == 'default'
+  when: ansible_distribution != 'Debian' and {{ pxe_root_path }} == 'default'
 
 - name: Set root path (debian)
   command: echo "/srv/tftp"
   register: pxe_root_path
-  when: ansible_distribution == 'Debian' and pxe_root_path == 'default'
+  when: ansible_distribution == 'Debian' and {{ pxe_root_path }} == 'default'
 
 - debug:
     msg: "pxe_root_path after set: {{ pxe_root_path }}"

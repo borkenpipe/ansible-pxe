@@ -4,21 +4,20 @@
     name: syslinux
     state: latest
 
-- debug:
-    msg: "ansible_distribution: {{ ansible_distribution }} pxe_root_path before set: {{ pxe_root_path }}"
+- name: Set root path (manual)
+  command: echo "{{ pxe_path }}"
+  register: pxe_root_path
+  when: pxe_path != ''
 
 - name: Set root path (non-debian)
   command: echo "/var/lib/tftpboot"
   register: pxe_root_path
-  when: ansible_distribution != 'Debian' and {{ pxe_root_path }} == 'default'
+  when: ansible_distribution != 'Debian' and pxe_path  == ''
 
 - name: Set root path (debian)
   command: echo "/srv/tftp"
   register: pxe_root_path
-  when: ansible_distribution == 'Debian' and {{ pxe_root_path }} == 'default'
-
-- debug:
-    msg: "pxe_root_path after set: {{ pxe_root_path }}"
+  when: ansible_distribution == 'Debian' and pxe_path == ''
 
 - name: Create root directory
   file:

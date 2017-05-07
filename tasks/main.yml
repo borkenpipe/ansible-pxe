@@ -5,55 +5,61 @@
     state: latest
 
 - name: Set root path (manual)
-  command: echo "{{ pxe_path }}"
-  register: pxe_root_path
+  shell: echo "{{ pxe_path }}"
+  register: pxe_root
   when: pxe_path != ''
+  changed_when: False
 
 - name: Set root path (non-debian)
-  command: echo "/var/lib/tftpboot"
-  register: pxe_root_path
+  shell: echo "/var/lib/tftpboot"
+  register: pxe_root
   when: ansible_distribution != 'Debian' and pxe_path  == ''
+  changed_when: False
 
 - name: Set root path (debian)
-  command: echo "/srv/tftp"
-  register: pxe_root_path
+  shell: echo "/srv/tftp"
+  register: pxe_root
   when: ansible_distribution == 'Debian' and pxe_path == ''
+  changed_when: False
 
-- debug:
-    msg: "Root path: {{ pxe_root_path }}"
+- name: Check if root present
+  stat:
+    path: "{{ pxe_root.stdout }}"
+  register: stat_result_root
 
 - name: Create root directory
   file:
-    path: "{{ pxe_root_path }}"
+    path: "{{ pxe_root.stdout }}"
     state: directory
     mode: 0755
+  when: stat_result_root.stat.exists == False
 
 - name: Check if syslinux files present
   stat:
-    path: "{{ pxe_root_path }}/pxelinux.0"
+    path: "{{ pxe_root.stdout }}/pxelinux.0"
   register: stat_result
 
 - name: Download and extract debian netboot (syslinux-common has this, but this is compact and intended for netboot)
   unarchive:
     src: "{{ pxe_syslinux_archive_url }}"
-    dest: "{{ pxe_root_path }}"
+    dest: "{{ pxe_root.stdout }}"
     remote_src: True
-  when: ansible_distribution == 'Debian'
+  when: stat_result.stat.exists == False and ansible_distribution == 'Debian'
 
 - name: Copy syslinux files to root
-  shell: cp -r "{{ pxe_syslinux_root }}/*" "{{ pxe_root_path }}"
+  shell: cp -r "{{ pxe_syslinux_root }}/*" "{{ pxe_root.stdout }}"
   when: stat_result.stat.exists == False and ansible_distribution != 'Debian'
 
 - name: Create cfg directory
   file:
-    path: "{{ pxe_root_path }}/pxelinux.cfg"
+    path: "{{ pxe_root.stdout }}/pxelinux.cfg"
     state: directory
     mode: 0755
 
 - name: Copy config
   template:
     src: default.j2
-    dest: "{{ pxe_root_path }}/pxelinux.cfg/{{ pxe_config_name }}"
+    dest: "{{ pxe_root.stdout }}/pxelinux.cfg/{{ pxe_config_name }}"
 
 - include: populate.yml
   vars:

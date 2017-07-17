@@ -3,6 +3,7 @@ pxe_config_name: default
 pxe_images_relative: images
 pxe_images:
   #- { name: 'centos7', arch: 'x86_64', url: 'http://mirror.centos.org/centos/7/os/x86_64/isolinux', method: 'http://mirror.centos.org/centos/7/os/x86_64/', kernel: 'vmlinuz', initrd: 'initrd.img' }
+  #- { name: 'fedora26', arch: 'x86_64', url: 'http://mirrors.mit.edu/fedora/linux/releases/26/Everything/x86_64/os/isolinux/', method: 'http://mirrors.mit.edu/fedora/linux/releases/26/Everything/x86_64/os/', kernel: 'vmlinuz', initrd: 'initrd.img' }
   - { name: 'debian8', arch: 'x86_64', url: 'http://ftp.us.debian.org/debian/dists/jessie/main/installer-amd64/current/images/netboot/debian-installer/amd64', method: 'http://ftp.nl.debian.org/debian/dists/jessie/main/installer-amd64/current/images/', kernel: 'linux', initrd: 'initrd.gz' }
   #- { name: 'clonezilla', arch: 'x86_64', url: 'http://free.nchc.org.tw/clonezilla-live/stable/clonezilla-live-2.5.0-25-amd64.iso', method: 'memdisk' }
   #- { name: 'win7', arch: 'x86_64', url: 'images/win7/x86_64/win7.iso', method: 'memdisk' }
